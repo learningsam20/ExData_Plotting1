@@ -4,7 +4,7 @@ hpower <- hpower[hpower$Date %in% c("1/2/2007", "2/2/2007"),]
 #hpower$Date <- as.factor(strftime(hpower$Date,'%a'))
 hpower$Date_Time <- paste(hpower$Date, hpower$Time)
 hpower$Date_Time <- strptime(hpower$Date_Time, "%d/%m/%Y %H:%M:%S")
-png("Plot3.png")
+png("Plot3.png",width=480, height=480)
 plot(type="n",y=hpower$Sub_metering_1,x=hpower$Date_Time,ylab="Energy sub metering",xlab="")
 lines(x = hpower$Date_Time, y = hpower$Sub_metering_1, col="black")
 lines(x = hpower$Date_Time, y = hpower$Sub_metering_2, col = "red")

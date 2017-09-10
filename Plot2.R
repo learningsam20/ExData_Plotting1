@@ -4,6 +4,6 @@ hpower <- hpower[hpower$Date %in% c("1/2/2007", "2/2/2007"),]
 #hpower$Date <- as.factor(strftime(hpower$Date,'%a'))
 hpower$Date_Time <- paste(hpower$Date, hpower$Time)
 hpower$Date_Time <- strptime(hpower$Date_Time, "%d/%m/%Y %H:%M:%S")
-png("Plot2.png")
+png("Plot2.png",width=480, height=480)
 plot(type="l",y=hpower$Global_active_power,x=hpower$Date_Time,ylab="Global Active Power (kilowatts)",xlab="")
 dev.off()
