@@ -1,0 +1,17 @@
+infile <- "household_power_consumption.txt"
+hpower <- read.table(infile, header = TRUE, sep = ";", colClasses = c(rep("character", 2), rep("numeric", 7)), na.strings = "?")
+hpower <- hpower[hpower$Date %in% c("1/2/2007", "2/2/2007"),]
+#hpower$Date <- as.factor(strftime(hpower$Date,'%a'))
+hpower$Date_Time <- paste(hpower$Date, hpower$Time)
+hpower$Date_Time <- strptime(hpower$Date_Time, "%d/%m/%Y %H:%M:%S")
+png("Plot4.png")
+par(mfcol = c(2, 2))
+plot(type="l",y=hpower$Global_active_power,x=hpower$Date_Time,ylab="Global Active Power (kilowatts)",xlab="")
+plot(type="n",y=hpower$Sub_metering_1,x=hpower$Date_Time,ylab="Energy sub metering",xlab="")
+lines(x = hpower$Date_Time, y = hpower$Sub_metering_1, col="black")
+lines(x = hpower$Date_Time, y = hpower$Sub_metering_2, col = "red")
+lines(x = hpower$Date_Time, y = hpower$Sub_metering_3, col = "blue")
+legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty = 1, col = c("black", "red", "blue"), lwd = 1)
+plot(type="l", y = hpower$Voltage,x = hpower$Date_Time, xlab = "datetime", ylab = "Voltage")
+plot(type="l", y = hpower$Global_reactive_power,x = hpower$Date_Time, xlab = "datetime", ylab = "Global Reactive Power")
+dev.off()
